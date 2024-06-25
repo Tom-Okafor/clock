@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>TIMER</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body {
+                min-height: 100vh;
+                background: linear-gradient(to bottom, #222 50%, #000 50%);
+                background-size: 100% 200%;
+                background-position: center top;
+                animation: shiftbg 15s cubic-bezier(1, 0, 0.7, 1.2) infinite
+                    alternate;
+            }
+
+            @keyframes shiftbg {
+                to {
+                    background-position: center bottom;
+                }
+            }
+
+            h1 {
+                font-size: 3rem;
+                font-family: Courier;
+                letter-spacing: 5px;
+                line-height: 3.5rem;
+                color: navajowhite;
+                padding: 1rem;
+                padding-top: 2rem;
+                text-align: center;
+                height: 10rem;
+                border-bottom: 2px solid coral;
+                width: 90vw;
+                margin-inline: auto;
+            }
+
+            .container {
+                height: calc(100vh - 10rem);
+                width: 100vw;
+                display: flex;
+                gap: 5%;
+                justify-content: center;
+                align-items: center;
+            }
+            .container div {
+                height: 150px;
+                width: clamp(50px, 25%, 120px);
+                border: 2px solid coral;
+                color: navajowhite;
+                display: grid;
+                place-content: center;
+                font-size: 4rem;
+                font-weight: 700;
+                font-family: "Courier New";
+            }
+        </style>
+    </head>
+    <body>
+        <h1>DIGITAL CLOCK</h1>
+
+        <div class="container">
+            <div class="one">0</div>
+            <div class="two">0</div>
+            <div class="three">0</div>
+        </div>
+
+        <script>
+            const HOURS = document.querySelector(".one");
+            const MINUTES = document.querySelector(".two");
+            const SECONDS = document.querySelector(".three");
+            function displayInitialTime() {
+                const CURRENT_HOUR = new Date().getHours();
+                const CURRENT_MINUTE = new Date().getMinutes();
+                const CURRENT_SECOND = new Date().getSeconds();
+
+               let interval = setInterval(() => {})
+            }
+            displayInitialTime();
+        </script>
+    </body>
+</html>
