@@ -75,14 +75,29 @@
             const HOURS = document.querySelector(".one");
             const MINUTES = document.querySelector(".two");
             const SECONDS = document.querySelector(".three");
-            function displayInitialTime() {
-                const CURRENT_HOUR = new Date().getHours();
-                const CURRENT_MINUTE = new Date().getMinutes();
-                const CURRENT_SECOND = new Date().getSeconds();
+            const DATE = {
+                CURRENT_HOUR: new Date().getHours(),
+                CURRENT_MINUTE: new Date().getMinutes(),
+                CURRENT_SECOND: new Date().getSeconds()
+            };
+            console.log(DATE.CURRENT_SECOND);
+            console.log(DATE.CURRENT_MINUTE);
+            console.log(DATE.CURRENT_HOUR);
+            function displayInitialTime(elem, vlue) {
+                let index = 0;
 
-               let interval = setInterval(() => {})
+                let interval = setInterval(() => {
+                    elem.innerText = index++;
+                    if (index == vlue + 1) {
+                        clearInterval(interval);
+                    }
+                }, 50);
             }
-            displayInitialTime();
+            setTimeout(() => {
+                displayInitialTime(HOURS, DATE.CURRENT_HOUR);
+                displayInitialTime(MINUTES, DATE.CURRENT_MINUTE);
+                displayInitialTime(SECONDS, DATE.CURRENT_SECOND);
+            }, 500);
         </script>
     </body>
 </html>
