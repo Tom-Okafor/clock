@@ -56,7 +56,7 @@
                 color: navajowhite;
                 display: grid;
                 place-content: center;
-                font-size: 4rem;
+                font-size: 3.5rem;
                 font-weight: 700;
                 font-family: "Courier New";
             }
@@ -67,7 +67,9 @@
 
         <div class="container">
             <div class="one">0</div>
+
             <div class="two">0</div>
+
             <div class="three">0</div>
         </div>
 
@@ -98,6 +100,21 @@
                 displayInitialTime(MINUTES, DATE.CURRENT_MINUTE);
                 displayInitialTime(SECONDS, DATE.CURRENT_SECOND);
             }, 500);
+            function updateTime() {
+                setInterval(() => {
+                    const DATE = {
+                        CURRENT_HOUR: new Date().getUTCHours(),
+                        CURRENT_MINUTE: new Date().getUTCMinutes(),
+                        CURRENT_SECOND: new Date().getUTCSeconds()
+                    };
+                    HOURS.innerText = DATE.CURRENT_HOUR;
+                    MINUTES.innerText = DATE.CURRENT_MINUTE;
+                    SECONDS.innerText = DATE.CURRENT_SECOND;
+                }, 1);
+            }
+            setTimeout(() => {
+                updateTime();
+            }, 1000);
         </script>
     </body>
 </html>
