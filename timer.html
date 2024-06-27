@@ -13,16 +13,22 @@
             }
             body {
                 min-height: 100vh;
-                background: linear-gradient(to bottom, #222 50%, #000 50%);
-                background-size: 100% 200%;
-                background-position: center top;
-                animation: shiftbg 15s cubic-bezier(1, 0, 0.7, 1.2) infinite
+                background: linear-gradient(
+                        to bottom,
+                        #222222bb 40%,
+                        #ffe0b277 40%,
+                        #000000bb 45%
+                    ),
+                    url("/Free  Hour, Minute, Pointer Background Images, Clo.jpeg");
+
+                background-position: left top;
+                animation: shiftbg 20s cubic-bezier(1, 0, 0.7, 1.1) infinite
                     alternate;
             }
 
             @keyframes shiftbg {
                 to {
-                    background-position: center bottom;
+                    background-position: right bottom;
                 }
             }
 
