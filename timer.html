@@ -72,11 +72,11 @@
         <h1>DIGITAL CLOCK</h1>
 
         <div class="container">
-            <div class="one">0</div>
+            <div class="one">00</div>
 
-            <div class="two">0</div>
+            <div class="two">00</div>
 
-            <div class="three">0</div>
+            <div class="three">00</div>
         </div>
 
         <script>
@@ -88,14 +88,15 @@
                 CURRENT_MINUTE: new Date().getMinutes(),
                 CURRENT_SECOND: new Date().getSeconds()
             };
-            console.log(DATE.CURRENT_SECOND);
-            console.log(DATE.CURRENT_MINUTE);
-            console.log(DATE.CURRENT_HOUR);
-            function displayInitialTime(elem, vlue) {
-                let index = 0;
 
+            function displayInitialTime(elem, vlue) {
+                const NUM = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+                let index = 0;
                 let interval = setInterval(() => {
-                    elem.innerText = index++;
+                    if (index++ == NUM[3]) {
+                        elem.innerText = `0${index++}`;
+                    } else
+                    elem.innerText = `${index++}`;
                     if (index == vlue + 1) {
                         clearInterval(interval);
                     }
@@ -105,22 +106,23 @@
                 displayInitialTime(HOURS, DATE.CURRENT_HOUR);
                 displayInitialTime(MINUTES, DATE.CURRENT_MINUTE);
                 displayInitialTime(SECONDS, DATE.CURRENT_SECOND);
+                setInterval(() => {
+                    updateTime();
+                }, 500);
             }, 500);
             function updateTime() {
-                setInterval(() => {
-                    const DATE = {
-                        CURRENT_HOUR: new Date().getUTCHours(),
-                        CURRENT_MINUTE: new Date().getUTCMinutes(),
-                        CURRENT_SECOND: new Date().getUTCSeconds()
-                    };
-                    HOURS.innerText = DATE.CURRENT_HOUR;
-                    MINUTES.innerText = DATE.CURRENT_MINUTE;
-                    SECONDS.innerText = DATE.CURRENT_SECOND;
-                }, 1);
+                const DATE = {
+                    CURRENT_HOUR: new Date().getHours(),
+                    CURRENT_MINUTE: new Date().getMinutes(),
+                    CURRENT_SECOND: new Date().getSeconds()
+                };
+                console.log(DATE.CURRENT_SECOND);
+                console.log(DATE.CURRENT_MINUTE);
+                console.log(DATE.CURRENT_HOUR);
+                HOURS.innerText = DATE.CURRENT_HOUR;
+                MINUTES.innerText = DATE.CURRENT_MINUTE;
+                SECONDS.innerText = DATE.CURRENT_SECOND;
             }
-            setTimeout(() => {
-                updateTime();
-            }, 1000);
         </script>
     </body>
 </html>
