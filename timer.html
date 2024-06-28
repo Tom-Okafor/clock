@@ -14,13 +14,12 @@
             body {
                 min-height: 100vh;
                 background: linear-gradient(
-                        to bottom,
+                        in lch,
                         #222222bb 40%,
                         #ffe0b277 40%,
                         #000000bb 45%
                     ),
                     url("/Free  Hour, Minute, Pointer Background Images, Clo.jpeg");
-
                 background-position: left top;
                 animation: shiftbg 20s cubic-bezier(1, 0, 0.7, 1.1) infinite
                     alternate;
@@ -47,36 +46,83 @@
                 margin-inline: auto;
             }
 
-            .container {
+            .parent {
                 height: calc(100vh - 10rem);
                 width: 100vw;
                 display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .container {
+                display: flex;
+                width: 100%;
                 gap: 5%;
                 justify-content: center;
                 align-items: center;
             }
-            .container div {
+            .container > div {
                 height: 150px;
                 width: clamp(50px, 25%, 120px);
                 border: 2px solid coral;
                 color: navajowhite;
                 display: grid;
                 place-content: center;
-                font-size: 3.5rem;
+                font-size: 3rem;
                 font-weight: 700;
                 font-family: "Courier New";
+                display: grid;
+                place-items: center;
+            }
+            .container p {
+                font-size: 0.5em;
+                padding: 0.2em;
+                background: linear-gradient(
+                    45deg,
+                    coral 30%,
+                    #ccc 35%,
+                    #ffe0b2 45%
+                );
+                background-clip: text;
+                color: transparent;
+            }
+            p {
+                color: white;
+            }
+
+            .container div:nth-child(2) p {
+                background: linear-gradient(
+                    230deg,
+                    coral 55%,
+                    #ccc,
+                    #ffe0b2 75%
+                );
+                background-clip: text;
+                color: transparent;
             }
         </style>
     </head>
     <body>
         <h1>DIGITAL CLOCK</h1>
+        <div class="parent">
+            <div class="container">
+                <div>
+                    <div class="one">00</div>
+                    <p>Hrs</p>
+                </div>
 
-        <div class="container">
-            <div class="one">00</div>
+                <div>
+                    <div class="two">00</div>
+                    <p>Mins</p>
+                </div>
 
-            <div class="two">00</div>
-
-            <div class="three">00</div>
+                <div>
+                    <div class="three">00</div>
+                    <p>Secs</p>
+                </div>
+            </div>
+            <p class="time"></p>
         </div>
 
         <script>
@@ -93,10 +139,11 @@
                 const NUM = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
                 let index = 0;
                 let interval = setInterval(() => {
-                    if (index++ == NUM[3]) {
-                        elem.innerText = `0${index++}`;
-                    } else
-                    elem.innerText = `${index++}`;
+                    let newInnerText = `0${index++}`;
+                    let text = `${newInnerText[newInnerText.length - 2]}${
+                        newInnerText[newInnerText.length - 1]
+                    }`;
+                    elem.innerText = text;
                     if (index == vlue + 1) {
                         clearInterval(interval);
                     }
@@ -116,12 +163,16 @@
                     CURRENT_MINUTE: new Date().getMinutes(),
                     CURRENT_SECOND: new Date().getSeconds()
                 };
-                console.log(DATE.CURRENT_SECOND);
-                console.log(DATE.CURRENT_MINUTE);
-                console.log(DATE.CURRENT_HOUR);
-                HOURS.innerText = DATE.CURRENT_HOUR;
-                MINUTES.innerText = DATE.CURRENT_MINUTE;
-                SECONDS.innerText = DATE.CURRENT_SECOND;
+                fixInnerText(HOURS, DATE.CURRENT_HOUR);
+                fixInnerText(MINUTES, DATE.CURRENT_MINUTE);
+                fixInnerText(SECONDS, DATE.CURRENT_SECOND);
+            }
+            function fixInnerText(elem, value) {
+                let newInnerText = `0${value}`;
+                let text = `${newInnerText[newInnerText.length - 2]}${
+                    newInnerText[newInnerText.length - 1]
+                }`;
+                elem.innerText = text;
             }
         </script>
     </body>
