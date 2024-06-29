@@ -101,6 +101,22 @@
                 background-clip: text;
                 color: transparent;
             }
+
+            .time {
+                color: #ffe0b2;
+                margin-top: 1rem;
+                padding: 1rem;
+                font-family: "Courier New";
+                text-transform: capitalize;
+                opacity: 0;
+                animation: fadeIn 1s cubic-bezier(1, 0.3, 0.7, 1.2) forwards;
+                animation-delay: 2.5s;
+            }
+            @keyframes fadeIn {
+                to {
+                    opacity: 1;
+                }
+            }
         </style>
     </head>
     <body>
@@ -122,7 +138,7 @@
                     <p>Secs</p>
                 </div>
             </div>
-            <p class="time"></p>
+            <p class="time">The time is..</p>
         </div>
 
         <script>
@@ -155,7 +171,7 @@
                 displayInitialTime(SECONDS, DATE.CURRENT_SECOND);
                 setInterval(() => {
                     updateTime();
-                }, 500);
+                }, 1500);
             }, 500);
             function updateTime() {
                 const DATE = {
@@ -166,6 +182,24 @@
                 fixInnerText(HOURS, DATE.CURRENT_HOUR);
                 fixInnerText(MINUTES, DATE.CURRENT_MINUTE);
                 fixInnerText(SECONDS, DATE.CURRENT_SECOND);
+                function stateTime() {
+                    const TIME_STRING_HOLDER = document.querySelector(".time");
+                    let statedTime;
+                    let minutes = `${DATE.CURRENT_MINUTE}`;
+                    if (minutes.length == 1) {
+                        minutes = `0${DATE.CURRENT_MINUTE}`;
+                    }
+                    if (DATE.CURRENT_HOUR < 12) {
+                        statedTime = `The time is ${DATE.CURRENT_HOUR}:${minutes} AM`;
+                    } else if (DATE.CURRENT_HOUR == 12) {
+                        statedTime = `The time is ${DATE.CURRENT_HOUR}:${minutes} PM`;
+                    } else {
+                        let newHour = DATE.CURRENT_HOUR - 12;
+                        statedTime = `The time is ${newHour}:${minutes} PM`;
+                    }
+                    TIME_STRING_HOLDER.innerText = statedTime;
+                }
+                setTimeout(stateTime, 1000);
             }
             function fixInnerText(elem, value) {
                 let newInnerText = `0${value}`;
