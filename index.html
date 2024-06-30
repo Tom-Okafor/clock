@@ -23,9 +23,20 @@
                 background-position: left top;
                 animation: shiftbg 20s cubic-bezier(1, 0, 0.7, 1.1) infinite
                     alternate;
+                filter: blur(0px);
                 position: relative;
+                transition: filter 1000ms cubic-bezier(1, 0, 0, 1);
             }
 
+            .blurBody {
+                transition: filter 1000ms cubic-bezier(1, 0, 0, 1);
+
+                filter: blur(10px);
+            }
+
+            .unblurBody {
+                filter: blur(0px);
+            }
             @keyframes shiftbg {
                 to {
                     background-position: right bottom;
@@ -156,7 +167,6 @@
                 background-size: cover;
             }
             .cities {
-                display: flex;
                 flex-direction: column;
                 border: 1px solid #ffe0b2;
                 position: absolute;
@@ -167,6 +177,23 @@
                 opacity: 0;
                 display: none;
             }
+            .showCities {
+                display: flex;
+                opacity: 0;
+                animation: fadeIn 1s cubic-bezier(1, 0.3, 0.7, 1.2) forwards;
+            }
+            .hideCities {
+                display: flex;
+                opacity: 1;
+                animation: fadeOut 1s cubic-bezier(1, 0.3, 0.7, 1.2) forwards;
+            }
+
+            @keyframes fadeOut {
+                to {
+                    opacity: 0;
+                }
+            }
+
             .cities li {
                 list-style-type: none;
                 color: navajowhite;
@@ -302,6 +329,33 @@
                 }`;
                 elem.innerText = text;
             }
+
+            function handleGlobalTimeDisplay() {
+                function handleGlobeButtonClickEvent() {
+                    const GLOBE_BUTTON = document.querySelector(".globe");
+                    const GLOBAL_LOCATIONS_HOLDER =
+                        document.querySelector(".cities");
+                    const HIDEABLE_BODY = document.querySelector(".body");
+                    let clicks = 0;
+                    GLOBE_BUTTON.addEventListener("click", () => {
+                        if (!clicks) {
+                            GLOBAL_LOCATIONS_HOLDER.classList.add("showCities");
+                            HIDEABLE_BODY.classList.add("blurBody");
+                            clicks++;
+                        } else {
+                            GLOBAL_LOCATIONS_HOLDER.classList.add("hideCities");
+                            HIDEABLE_BODY.classList.add("unblurBody");
+                            setTimeout(() => {
+                                GLOBAL_LOCATIONS_HOLDER.className = "cities";
+                                HIDEABLE_BODY.className = "body";
+                            }, 1000);
+                            clicks--;
+                        }
+                    });
+                }
+                handleGlobeButtonClickEvent();
+            }
+            handleGlobalTimeDisplay();
         </script>
     </body>
 </html>
