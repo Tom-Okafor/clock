@@ -254,17 +254,17 @@
             <div class="parent">
                 <div class="container">
                     <div>
-                        <div class="one">00</div>
+                        <div class="hours">00</div>
                         <p>Hrs</p>
                     </div>
 
                     <div>
-                        <div class="two">00</div>
+                        <div class="minutes">00</div>
                         <p>Mins</p>
                     </div>
 
                     <div>
-                        <div class="three">00</div>
+                        <div class="seconds">00</div>
                         <p>Secs</p>
                     </div>
                 </div>
@@ -288,9 +288,7 @@
                 ></path>
             </svg>
         </button>
-        <div class="cityTime">
-          
-        </div>
+        <div class="cityTime"></div>
         <ul class="cities">
             <li class="one" tabindex="1">beijing</li>
             <li class="two" tabindex="1">dubai</li>
@@ -303,9 +301,9 @@
             <li class="nine" tabindex="1">tokyo</li>
         </ul>
         <script>
-            const HOURS = document.querySelector(".one");
-            const MINUTES = document.querySelector(".two");
-            const SECONDS = document.querySelector(".three");
+            const HOURS = document.querySelector(".hours");
+            const MINUTES = document.querySelector(".minutes");
+            const SECONDS = document.querySelector(".seconds");
             const DATE = {
                 CURRENT_HOUR: new Date().getHours(),
                 CURRENT_MINUTE: new Date().getMinutes(),
@@ -395,6 +393,67 @@
                 }
                 handleGlobeButtonClickEvent();
             }
+
+            function handleCityTimeDisplay() {
+                const CITIES = {
+                    one: {
+                        name: "BEIJING",
+                        background: "Beijing.jpeg",
+                        timeZone: 8
+                    },
+
+                    two: {
+                        name: "DUBAI",
+                        background:
+                            "Dubai_Skylines_at_night_(Pexels_3787839).jpg",
+                        timeZone: 4
+                    },
+
+                    three: {
+                        name: "HONG KONG",
+                        background: "Hong Kong.jpeg",
+                        timeZone: 8
+                    },
+
+                    four: {
+                        name: "LONDON",
+                        background: "London_Skyline_(125508655).jpeg",
+                        timeZone: 1
+                    },
+
+                    five: {
+                        name: "LOS ANGELES",
+                        background: "LA.jpeg",
+                        timeZone: -7
+                    },
+
+                    six: {
+                        name: "NEW YORK",
+                        background: "NY.jpeg",
+                        timeZone: -4
+                    },
+
+                    seven: {
+                        name: "PARIS",
+                        background: "paris.jpeg",
+                        timeZone: 2
+                    },
+
+                    eight: {
+                        name: "SYDNEY",
+                        background: "SYDNEYAUS.jpeg",
+                        timeZone: 10
+                    },
+
+                    nine: {
+                        name: "TOKYO",
+                        background: "tokyo.jpeg",
+                        timeZone: 9
+                    }
+                };
+            }
+            handleCityTimeDisplay();
+
             handleGlobalTimeDisplay();
         </script>
     </body>
