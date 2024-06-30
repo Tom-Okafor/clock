@@ -129,11 +129,12 @@
                     opacity: 1;
                 }
             }
-
             button {
                 background: transparent;
                 outline: transparent;
                 border: 0;
+            }
+            .globe {
                 position: absolute;
                 bottom: 0;
                 right: 0;
@@ -162,9 +163,46 @@
                 top: 0;
                 height: 100%;
                 width: 100%;
-                /* background: linear-gradient(#00000077, #00000077),
-                    url("/Sydney.jpeg"); */
+                background: linear-gradient(#00000057, #00000057),
+                    url("/Sydney.jpeg");
                 background-size: cover;
+                font-family: "Times New Roman";
+            }
+            .cityTimeShow h2 {
+                font-size: 3rem;
+                color: coral;
+                padding-top: 2rem;
+                display: grid;
+                place-items: center;
+            }
+            .showTime {
+                min-height: calc(100% - 5rem);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                font-size: 4rem;
+                color: whitesmoke;
+                font-family: Courier;
+            }
+            .showTime span {
+                font-size: 1.2rem;
+            }
+            .showTime button {
+                border: 1px solid tomato;
+                color: whitesmoke;
+                font-family: "Times New Roman";
+                padding: 10px 15px;
+                border-radius: 5px;
+                margin-top: 25px;
+                backdrop-filter: blur(3px);
+                transition: all 500ms ease-in-out;
+            }
+            .showTime button:hover {
+                letter-spacing: 2px;
+                color: tomato;
+                border-color: whitesmoke;
+                border-radius: 7px;
             }
             .cities {
                 flex-direction: column;
@@ -250,7 +288,9 @@
                 ></path>
             </svg>
         </button>
-        <div class="cityTime"></div>
+        <div class="cityTime">
+          
+        </div>
         <ul class="cities">
             <li class="one" tabindex="1">beijing</li>
             <li class="two" tabindex="1">dubai</li>
