@@ -472,6 +472,38 @@
                                         CITY_TIME_BLOCK.appendChild(
                                             CITY_TIME_BLOCK_HEADER
                                         );
+                                        const CITY_TIME_BLOCK_TIME_HOLDER =
+                                            document.createElement("div");
+                                        CITY_TIME_BLOCK_TIME_HOLDER.className =
+                                            "showTime";
+                                        CITY_TIME_BLOCK.appendChild(
+                                            CITY_TIME_BLOCK_TIME_HOLDER
+                                        );
+                                        setInterval(() => {
+                                            let newDate = new Date();
+                                            let CURRENT_HOUR =
+                                                newDate.getUTCHours();
+                                            let displayHour =
+                                                CURRENT_HOUR +
+                                                CITIES.one.timeZone;
+                                            if (displayHour > 23) {
+                                                displayHour -= 24;
+                                            }
+                                            let period = "AM";
+                                            if (displayHour >= 12) {
+                                                period = "PM";
+                                            }
+                                            if (displayHour > 12) {
+                                                displayHour -= 12;
+                                            }
+                                            let displayMinutes = `${newDate.getUTCMinutes()}`;
+                                            if (displayMinutes.length == 1) {
+                                                displayMinutes = `0${displayMinutes}`;
+                                            }
+                                            let timeNode = `${displayHour}:${displayMinutes} ${period}`;
+                                            CITY_TIME_BLOCK_TIME_HOLDER.innerText =
+                                                timeNode;
+                                        }, 500);
                                         break;
                                 }
                             });
