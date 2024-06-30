@@ -121,7 +121,7 @@
                 font-family: "Courier New";
                 text-transform: capitalize;
                 opacity: 0;
-                animation: fadeIn 1s cubic-bezier(1, 0.3, 0.7, 1.2) forwards;
+                animation: fadeIn 1s cubic-bezier(1, 0, 0.7, 1) forwards;
                 animation-delay: 2.5s;
             }
             @keyframes fadeIn {
@@ -155,7 +155,22 @@
             button:hover .icon {
                 fill: coral;
             }
-
+.cityTimeHide{
+  animation: hide 2s ease forwards;
+  opacity: 1;
+}
+@keyframes hide {
+  
+  50%{
+    filter: blur(3px);
+    opacity: 1;
+  }
+  
+  100%{
+    filter: blur(5px);
+    opacity: 0;
+  }
+}
             .cityTimeShow {
                 position: absolute;
                 left: 0;
@@ -221,7 +236,7 @@
             .hideCities {
                 display: flex;
                 opacity: 1;
-                animation: fadeOut 1s cubic-bezier(1, 0.3, 0.7, 1.2) forwards;
+                animation: fadeOut 1s ease-in-out forwards;
             }
 
             @keyframes fadeOut {
@@ -526,13 +541,16 @@
                                                             TIME_HOLDER_BUTTON
                                                         );
                                  createAndAppendTime();
-                                              console.log(CITY_TIME_BLOCK_TIME_HOLDER.children);      CITY_TIME_BLOCK.appendChild(
+                                                 CITY_TIME_BLOCK.appendChild(
                                                         CITY_TIME_BLOCK_TIME_HOLDER
                                                     );
-                                                    console.log(CITY_TIME_BLOCK);
-                                                    console.log(
-                                                        CITY_TIME_BLOCK_TIME_HOLDER
-                                                    );
+                                                   TIME_HOLDER_BUTTON.addEventListener("click", () => {
+                                                  
+                                                 CITY_TIME_BLOCK.classList.add("cityTimeHide");
+                                               setTimeout(() => {
+                                                 CITY_TIME_BLOCK.innerHTML = "";  CITY_TIME_BLOCK.className = "cityTime";
+                                               }, 2050) 
+                                                   });
                                                     break;
                                             }
                                         });
