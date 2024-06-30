@@ -163,8 +163,6 @@
                 top: 0;
                 height: 100%;
                 width: 100%;
-                background: linear-gradient(#00000057, #00000057),
-                    url("/Sydney.jpeg");
                 background-size: cover;
                 font-family: "Times New Roman";
             }
@@ -375,7 +373,12 @@
                         document.querySelector(".cities");
                     const HIDEABLE_BODY = document.querySelector(".body");
                     let clicks = 0;
-                    GLOBE_BUTTON.addEventListener("click", () => {
+                    GLOBE_BUTTON.addEventListener(
+                        "click",
+                        showAndHideLocations
+                    );
+
+                    function showAndHideLocations() {
                         if (!clicks) {
                             GLOBAL_LOCATIONS_HOLDER.classList.add("showCities");
                             HIDEABLE_BODY.classList.add("blurBody");
@@ -389,70 +392,95 @@
                             }, 1000);
                             clicks--;
                         }
-                    });
+                    }
+                    function handleCityTimeDisplay() {
+                        const CITIES = {
+                            one: {
+                                name: "BEIJING",
+                                background: "/Beijing.jpeg",
+                                timeZone: 8
+                            },
+
+                            two: {
+                                name: "DUBAI",
+                                background:
+                                    "Dubai_Skylines_at_night_(Pexels_3787839).jpg",
+                                timeZone: 4
+                            },
+
+                            three: {
+                                name: "HONG KONG",
+                                background: "/Hong Kong.jpeg",
+                                timeZone: 8
+                            },
+
+                            four: {
+                                name: "LONDON",
+                                background: "/London_Skyline_(125508655).jpeg",
+                                timeZone: 1
+                            },
+
+                            five: {
+                                name: "LOS ANGELES",
+                                background: "/LA.jpeg",
+                                timeZone: -7
+                            },
+
+                            six: {
+                                name: "NEW YORK",
+                                background: "/NY.jpeg",
+                                timeZone: -4
+                            },
+
+                            seven: {
+                                name: "PARIS",
+                                background: "/paris.jpeg",
+                                timeZone: 2
+                            },
+
+                            eight: {
+                                name: "SYDNEY",
+                                background: "/SYDNEYAUS.jpeg",
+                                timeZone: 10
+                            },
+
+                            nine: {
+                                name: "TOKYO",
+                                background: "/tokyo.jpeg",
+                                timeZone: 9
+                            }
+                        };
+                        const CITY_BUTTONS =
+                            document.querySelectorAll(".cities > li");
+                        const CITY_TIME_BLOCK =
+                            document.querySelector(".cityTime");
+                        for (let eachCityButton of CITY_BUTTONS) {
+                            eachCityButton.addEventListener("click", () => {
+                                let classname = eachCityButton.className;
+                                showAndHideLocations();
+                                CITY_TIME_BLOCK.classList.add("cityTimeShow");
+
+                                switch (classname) {
+                                    case "one":
+                                        const CTY_TIME_BLOCK_BACKGRND =
+                                            CITIES.one.background;
+                                        CITY_TIME_BLOCK.style.background = `linear-gradient(#00000057, #00000057), url(${CTY_TIME_BLOCK_BACKGRND})`;
+                                        const CITY_TIME_BLOCK_HEADER =
+                                            document.createElement("h2");
+                                        CITY_TIME_BLOCK_HEADER.innerText =
+                                            CITIES.one.name;
+                                        CITY_TIME_BLOCK.appendChild(
+                                            CITY_TIME_BLOCK_HEADER
+                                        );
+                                        break;
+                                }
+                            });
+                        }
+                    }
+                    handleCityTimeDisplay();
                 }
                 handleGlobeButtonClickEvent();
             }
-
-            function handleCityTimeDisplay() {
-                const CITIES = {
-                    one: {
-                        name: "BEIJING",
-                        background: "Beijing.jpeg",
-                        timeZone: 8
-                    },
-
-                    two: {
-                        name: "DUBAI",
-                        background:
-                            "Dubai_Skylines_at_night_(Pexels_3787839).jpg",
-                        timeZone: 4
-                    },
-
-                    three: {
-                        name: "HONG KONG",
-                        background: "Hong Kong.jpeg",
-                        timeZone: 8
-                    },
-
-                    four: {
-                        name: "LONDON",
-                        background: "London_Skyline_(125508655).jpeg",
-                        timeZone: 1
-                    },
-
-                    five: {
-                        name: "LOS ANGELES",
-                        background: "LA.jpeg",
-                        timeZone: -7
-                    },
-
-                    six: {
-                        name: "NEW YORK",
-                        background: "NY.jpeg",
-                        timeZone: -4
-                    },
-
-                    seven: {
-                        name: "PARIS",
-                        background: "paris.jpeg",
-                        timeZone: 2
-                    },
-
-                    eight: {
-                        name: "SYDNEY",
-                        background: "SYDNEYAUS.jpeg",
-                        timeZone: 10
-                    },
-
-                    nine: {
-                        name: "TOKYO",
-                        background: "tokyo.jpeg",
-                        timeZone: 9
-                    }
-                };
-            }
-            handleCityTimeDisplay();
 
             handleGlobalTimeDisplay();
         </script>
