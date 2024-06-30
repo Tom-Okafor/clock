@@ -168,7 +168,7 @@
             }
             .cityTimeShow h2 {
                 font-size: 3rem;
-                color: coral;
+                color: tomato;
                 padding-top: 2rem;
                 display: grid;
                 place-items: center;
@@ -299,222 +299,251 @@
             <li class="nine" tabindex="1">tokyo</li>
         </ul>
         <script>
-            const HOURS = document.querySelector(".hours");
-            const MINUTES = document.querySelector(".minutes");
-            const SECONDS = document.querySelector(".seconds");
-            const DATE = {
-                CURRENT_HOUR: new Date().getHours(),
-                CURRENT_MINUTE: new Date().getMinutes(),
-                CURRENT_SECOND: new Date().getSeconds()
-            };
-
-            function displayInitialTime(elem, vlue) {
-                const NUM = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-                let index = 0;
-                let interval = setInterval(() => {
-                    let newInnerText = `0${index++}`;
-                    let text = `${newInnerText[newInnerText.length - 2]}${
-                        newInnerText[newInnerText.length - 1]
-                    }`;
-                    elem.innerText = text;
-                    if (index == vlue + 1) {
-                        clearInterval(interval);
-                    }
-                }, 50);
-            }
-            setTimeout(() => {
-                displayInitialTime(HOURS, DATE.CURRENT_HOUR);
-                displayInitialTime(MINUTES, DATE.CURRENT_MINUTE);
-                displayInitialTime(SECONDS, DATE.CURRENT_SECOND);
-                setInterval(() => {
-                    updateTime();
-                }, 500);
-            }, 500);
-            function updateTime() {
-                const DATE = {
-                    CURRENT_HOUR: new Date().getHours(),
-                    CURRENT_MINUTE: new Date().getMinutes(),
-                    CURRENT_SECOND: new Date().getSeconds()
-                };
-                fixInnerText(HOURS, DATE.CURRENT_HOUR);
-                fixInnerText(MINUTES, DATE.CURRENT_MINUTE);
-                fixInnerText(SECONDS, DATE.CURRENT_SECOND);
-                function stateTime() {
-                    const TIME_STRING_HOLDER = document.querySelector(".time");
-                    let statedTime;
-                    let minutes = `${DATE.CURRENT_MINUTE}`;
-                    if (minutes.length == 1) {
-                        minutes = `0${DATE.CURRENT_MINUTE}`;
-                    }
-                    if (DATE.CURRENT_HOUR < 12) {
-                        statedTime = `The time is ${DATE.CURRENT_HOUR}:${minutes} AM`;
-                    } else if (DATE.CURRENT_HOUR == 12) {
-                        statedTime = `The time is ${DATE.CURRENT_HOUR}:${minutes} PM`;
-                    } else {
-                        let newHour = DATE.CURRENT_HOUR - 12;
-                        statedTime = `The time is ${newHour}:${minutes} PM`;
-                    }
-                    TIME_STRING_HOLDER.innerText = statedTime;
-                }
-                setTimeout(stateTime, 100);
-            }
-            function fixInnerText(elem, value) {
-                let newInnerText = `0${value}`;
-                let text = `${newInnerText[newInnerText.length - 2]}${
-                    newInnerText[newInnerText.length - 1]
-                }`;
-                elem.innerText = text;
-            }
-
-            function handleGlobalTimeDisplay() {
-                function handleGlobeButtonClickEvent() {
-                    const GLOBE_BUTTON = document.querySelector(".globe");
-                    const GLOBAL_LOCATIONS_HOLDER =
-                        document.querySelector(".cities");
-                    const HIDEABLE_BODY = document.querySelector(".body");
-                    let clicks = 0;
-                    GLOBE_BUTTON.addEventListener(
-                        "click",
-                        showAndHideLocations
-                    );
-
-                    function showAndHideLocations() {
-                        if (!clicks) {
-                            GLOBAL_LOCATIONS_HOLDER.classList.add("showCities");
-                            HIDEABLE_BODY.classList.add("blurBody");
-                            clicks++;
-                        } else {
-                            GLOBAL_LOCATIONS_HOLDER.classList.add("hideCities");
-                            HIDEABLE_BODY.classList.add("unblurBody");
-                            setTimeout(() => {
-                                GLOBAL_LOCATIONS_HOLDER.className = "cities";
-                                HIDEABLE_BODY.className = "body";
-                            }, 1000);
-                            clicks--;
-                        }
-                    }
-                    function handleCityTimeDisplay() {
-                        const CITIES = {
-                            one: {
-                                name: "BEIJING",
-                                background: "/Beijing.jpeg",
-                                timeZone: 8
-                            },
-
-                            two: {
-                                name: "DUBAI",
-                                background:
-                                    "Dubai_Skylines_at_night_(Pexels_3787839).jpg",
-                                timeZone: 4
-                            },
-
-                            three: {
-                                name: "HONG KONG",
-                                background: "/Hong Kong.jpeg",
-                                timeZone: 8
-                            },
-
-                            four: {
-                                name: "LONDON",
-                                background: "/London_Skyline_(125508655).jpeg",
-                                timeZone: 1
-                            },
-
-                            five: {
-                                name: "LOS ANGELES",
-                                background: "/LA.jpeg",
-                                timeZone: -7
-                            },
-
-                            six: {
-                                name: "NEW YORK",
-                                background: "/NY.jpeg",
-                                timeZone: -4
-                            },
-
-                            seven: {
-                                name: "PARIS",
-                                background: "/paris.jpeg",
-                                timeZone: 2
-                            },
-
-                            eight: {
-                                name: "SYDNEY",
-                                background: "/SYDNEYAUS.jpeg",
-                                timeZone: 10
-                            },
-
-                            nine: {
-                                name: "TOKYO",
-                                background: "/tokyo.jpeg",
-                                timeZone: 9
-                            }
+                        const HOURS = document.querySelector(".hours");
+                        const MINUTES = document.querySelector(".minutes");
+                        const SECONDS = document.querySelector(".seconds");
+                        const DATE = {
+                            CURRENT_HOUR: new Date().getHours(),
+                            CURRENT_MINUTE: new Date().getMinutes(),
+                            CURRENT_SECOND: new Date().getSeconds()
                         };
-                        const CITY_BUTTONS =
-                            document.querySelectorAll(".cities > li");
-                        const CITY_TIME_BLOCK =
-                            document.querySelector(".cityTime");
-                        for (let eachCityButton of CITY_BUTTONS) {
-                            eachCityButton.addEventListener("click", () => {
-                                let classname = eachCityButton.className;
-                                showAndHideLocations();
-                                CITY_TIME_BLOCK.classList.add("cityTimeShow");
 
-                                switch (classname) {
-                                    case "one":
-                                        const CTY_TIME_BLOCK_BACKGRND =
-                                            CITIES.one.background;
-                                        CITY_TIME_BLOCK.style.background = `linear-gradient(#00000057, #00000057), url(${CTY_TIME_BLOCK_BACKGRND})`;
-                                        const CITY_TIME_BLOCK_HEADER =
-                                            document.createElement("h2");
-                                        CITY_TIME_BLOCK_HEADER.innerText =
-                                            CITIES.one.name;
-                                        CITY_TIME_BLOCK.appendChild(
-                                            CITY_TIME_BLOCK_HEADER
-                                        );
-                                        const CITY_TIME_BLOCK_TIME_HOLDER =
-                                            document.createElement("div");
-                                        CITY_TIME_BLOCK_TIME_HOLDER.className =
-                                            "showTime";
-                                        CITY_TIME_BLOCK.appendChild(
-                                            CITY_TIME_BLOCK_TIME_HOLDER
-                                        );
-                                        setInterval(() => {
-                                            let newDate = new Date();
-                                            let CURRENT_HOUR =
-                                                newDate.getUTCHours();
-                                            let displayHour =
-                                                CURRENT_HOUR +
-                                                CITIES.one.timeZone;
-                                            if (displayHour > 23) {
-                                                displayHour -= 24;
-                                            }
-                                            let period = "AM";
-                                            if (displayHour >= 12) {
-                                                period = "PM";
-                                            }
-                                            if (displayHour > 12) {
-                                                displayHour -= 12;
-                                            }
-                                            let displayMinutes = `${newDate.getUTCMinutes()}`;
-                                            if (displayMinutes.length == 1) {
-                                                displayMinutes = `0${displayMinutes}`;
-                                            }
-                                            let timeNode = `${displayHour}:${displayMinutes} ${period}`;
-                                            CITY_TIME_BLOCK_TIME_HOLDER.innerText =
-                                                timeNode;
-                                        }, 500);
-                                        break;
+                        function displayInitialTime(elem, vlue) {
+                            const NUM = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+                            let index = 0;
+                            let interval = setInterval(() => {
+                                let newInnerText = `0${index++}`;
+                                let text = `${newInnerText[newInnerText.length - 2]}${
+                                    newInnerText[newInnerText.length - 1]
+                                }`;
+                                elem.innerText = text;
+                                if (index == vlue + 1) {
+                                    clearInterval(interval);
                                 }
-                            });
+                            }, 50);
                         }
-                    }
-                    handleCityTimeDisplay();
-                }
-                handleGlobeButtonClickEvent();
-            }
+                        setTimeout(() => {
+                            displayInitialTime(HOURS, DATE.CURRENT_HOUR);
+                            displayInitialTime(MINUTES, DATE.CURRENT_MINUTE);
+                            displayInitialTime(SECONDS, DATE.CURRENT_SECOND);
+                            setInterval(() => {
+                                updateTime();
+                            }, 500);
+                        }, 500);
+                        function updateTime() {
+                            const DATE = {
+                                CURRENT_HOUR: new Date().getHours(),
+                                CURRENT_MINUTE: new Date().getMinutes(),
+                                CURRENT_SECOND: new Date().getSeconds()
+                            };
+                            fixInnerText(HOURS, DATE.CURRENT_HOUR);
+                            fixInnerText(MINUTES, DATE.CURRENT_MINUTE);
+                            fixInnerText(SECONDS, DATE.CURRENT_SECOND);
+                            function stateTime() {
+                                const TIME_STRING_HOLDER = document.querySelector(".time");
+                                let statedTime;
+                                let minutes = `${DATE.CURRENT_MINUTE}`;
+                                if (minutes.length == 1) {
+                                    minutes = `0${DATE.CURRENT_MINUTE}`;
+                                }
+                                if (DATE.CURRENT_HOUR < 12) {
+                                    statedTime = `The time is ${DATE.CURRENT_HOUR}:${minutes} AM`;
+                                } else if (DATE.CURRENT_HOUR == 12) {
+                                    statedTime = `The time is ${DATE.CURRENT_HOUR}:${minutes} PM`;
+                                } else {
+                                    let newHour = DATE.CURRENT_HOUR - 12;
+                                    statedTime = `The time is ${newHour}:${minutes} PM`;
+                                }
+                                TIME_STRING_HOLDER.innerText = statedTime;
+                            }
+                            setTimeout(stateTime, 100);
+                        }
+                        function fixInnerText(elem, value) {
+                            let newInnerText = `0${value}`;
+                            let text = `${newInnerText[newInnerText.length - 2]}${
+                                newInnerText[newInnerText.length - 1]
+                            }`;
+                            elem.innerText = text;
+                        }
 
-            handleGlobalTimeDisplay();
+                        function handleGlobalTimeDisplay() {
+                            function handleGlobeButtonClickEvent() {
+                                const GLOBE_BUTTON = document.querySelector(".globe");
+                                const GLOBAL_LOCATIONS_HOLDER =
+                                    document.querySelector(".cities");
+                                const HIDEABLE_BODY = document.querySelector(".body");
+                                let clicks = 0;
+                                GLOBE_BUTTON.addEventListener(
+                                    "click",
+                                    showAndHideLocations
+                                );
+
+                                function showAndHideLocations() {
+                                    if (!clicks) {
+                                        GLOBAL_LOCATIONS_HOLDER.classList.add("showCities");
+                                        HIDEABLE_BODY.classList.add("blurBody");
+                                        clicks++;
+                                    } else {
+                                        GLOBAL_LOCATIONS_HOLDER.classList.add("hideCities");
+                                        HIDEABLE_BODY.classList.add("unblurBody");
+                                        setTimeout(() => {
+                                            GLOBAL_LOCATIONS_HOLDER.className = "cities";
+                                            HIDEABLE_BODY.className = "body";
+                                        }, 1000);
+                                        clicks--;
+                                    }
+                                }
+                                function handleCityTimeDisplay() {
+                                    const CITIES = {
+                                        one: {
+                                            name: "BEIJING",
+                                            background: "/Beijing.jpeg",
+                                            timeZone: 8
+                                        },
+
+                                        two: {
+                                            name: "DUBAI",
+                                            background:
+                                                "Dubai_Skylines_at_night_(Pexels_3787839).jpg",
+                                            timeZone: 4
+                                        },
+
+                                        three: {
+                                            name: "HONG KONG",
+                                            background: "/Hong Kong.jpeg",
+                                            timeZone: 8
+                                        },
+
+                                        four: {
+                                            name: "LONDON",
+                                            background: "/London_Skyline_(125508655).jpeg",
+                                            timeZone: 1
+                                        },
+
+                                        five: {
+                                            name: "LOS ANGELES",
+                                            background: "/LA.jpeg",
+                                            timeZone: -7
+                                        },
+
+                                        six: {
+                                            name: "NEW YORK",
+                                            background: "/NY.jpeg",
+                                            timeZone: -4
+                                        },
+
+                                        seven: {
+                                            name: "PARIS",
+                                            background: "/paris.jpeg",
+                                            timeZone: 2
+                                        },
+
+                                        eight: {
+                                            name: "SYDNEY",
+                                            background: "/SYDNEYAUS.jpeg",
+                                            timeZone: 10
+                                        },
+
+                                        nine: {
+                                            name: "TOKYO",
+                                            background: "/tokyo.jpeg",
+                                            timeZone: 9
+                                        }
+                                    };
+                                    const CITY_BUTTONS =
+                                        document.querySelectorAll(".cities > li");
+                                    const CITY_TIME_BLOCK =
+                                        document.querySelector(".cityTime");
+                                    for (let eachCityButton of CITY_BUTTONS) {
+                                        eachCityButton.addEventListener("click", () => {
+                                            let classname = eachCityButton.className;
+                                            showAndHideLocations();
+                                            CITY_TIME_BLOCK.classList.add("cityTimeShow");
+
+                                            switch (classname) {
+                                                case "one":
+                                                    const CTY_TIME_BLOCK_BACKGRND =
+                                                        CITIES.one.background;
+                                                    CITY_TIME_BLOCK.style.background = `linear-gradient(#00000057, #00000057), url(${CTY_TIME_BLOCK_BACKGRND})`;
+                                                    const CITY_TIME_BLOCK_HEADER =
+                                                        document.createElement("h2");
+                                                    CITY_TIME_BLOCK_HEADER.innerText =
+                                                        CITIES.one.name;
+                                                    CITY_TIME_BLOCK.appendChild(
+                                                        CITY_TIME_BLOCK_HEADER
+                                                    );
+                                                    const CITY_TIME_BLOCK_TIME_HOLDER =
+                                                        document.createElement("div");
+                                                    CITY_TIME_BLOCK_TIME_HOLDER.className =
+                                                        "showTime";
+
+                                                    function createAndAppendTime() {
+                                                        let newDate = new Date();
+                                                        let CURRENT_HOUR =
+                                                            newDate.getUTCHours();
+                                                        let displayHour =
+                                                            CURRENT_HOUR +
+                                                            CITIES.one.timeZone;
+                                                        if (displayHour > 23) {
+                                                            displayHour -= 24;
+                                                        }
+                                                        let period = "AM";
+                                                        if (displayHour >= 12) {
+                                                            period = "PM";
+                                                        }
+                                                        if (displayHour > 12) {
+                                                            displayHour -= 12;
+                                                        }
+                                                        let displayMinutes = `${newDate.getUTCMinutes()}`;
+                                                        if (displayMinutes.length == 1) {
+                                                            displayMinutes = `0${displayMinutes}`;
+                                                        }
+                                                        let timeNode = `<p>${displayHour}:${displayMinutes} ${period}</p>`;
+                                                        CITY_TIME_BLOCK_TIME_HOLDER.insertAdjacentHTML(
+                                                            "afterbegin",
+                                                            timeNode
+                                                        );
+                                            setTimeout(() => {
+                                              CITY_TIME_BLOCK_TIME_HOLDER.removeChild(CITY_TIME_BLOCK_TIME_HOLDER.children[0]);
+                                              createAndAppendTime();
+                                            }, 100);                                }        
+                                           const TIME_HOLDER_SPAN =
+                                                            document.createElement("span");
+                                                        const TIME_HOLDER_BUTTON =
+                                                            document.createElement(
+                                                                "button"
+                                                            );
+                                                        const SPAN_TEXT = `GMT +${CITIES.one.timeZone}`;
+                                                        const BUTTON_TEXT = "exit?";
+                                                        TIME_HOLDER_SPAN.innerText =
+                                                            SPAN_TEXT;
+                                                        TIME_HOLDER_BUTTON.innerText =
+                                                            BUTTON_TEXT;
+                                                        CITY_TIME_BLOCK_TIME_HOLDER.appendChild(
+                                                            TIME_HOLDER_SPAN
+                                                        );
+                                                        CITY_TIME_BLOCK_TIME_HOLDER.appendChild(
+                                                            TIME_HOLDER_BUTTON
+                                                        );
+                                 createAndAppendTime();
+                                              console.log(CITY_TIME_BLOCK_TIME_HOLDER.children);      CITY_TIME_BLOCK.appendChild(
+                                                        CITY_TIME_BLOCK_TIME_HOLDER
+                                                    );
+                                                    console.log(CITY_TIME_BLOCK);
+                                                    console.log(
+                                                        CITY_TIME_BLOCK_TIME_HOLDER
+                                                    );
+                                                    break;
+                                            }
+                                        });
+                                    }
+                                }
+                                handleCityTimeDisplay();
+                            }
+                            handleGlobeButtonClickEvent();
+                        }
+
+                        handleGlobalTimeDisplay();
         </script>
     </body>
 </html>
