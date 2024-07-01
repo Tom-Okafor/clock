@@ -21,6 +21,7 @@
                     ),
                     url("/Free  Hour, Minute, Pointer Background Images, Clo.jpeg");
                 background-position: left top;
+                background-size: cover;
                 animation: shiftbg 20s cubic-bezier(1, 0, 0.7, 1.1) infinite
                     alternate;
                 filter: blur(0px);
@@ -56,6 +57,10 @@
                 border-bottom: 2px solid coral;
                 width: 90vw;
                 margin-inline: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
             }
 
             .parent {
@@ -177,14 +182,20 @@
                 top: 0;
                 height: 100%;
                 width: 100%;
-                background-size: cover;
-                font-family: "Times New Roman";
+                opacity: 1;
+                overflow-y: hidden;
+                animation: shiftbg 10s cubic-bezier(1, 0, 0.5, 0.9) infinite
+                    alternate;
+                    transition: all 2s ease-in-out;
+                    
             }
             .cityTimeShow h2 {
                 font-size: 3rem;
                 color: tomato;
                 padding-top: 2rem;
                 display: grid;
+                                font-family: "Courier New";
+
                 place-items: center;
             }
             .showTime {
@@ -516,7 +527,8 @@
                         }
                         function showCityTime(city) {
                              CITY_TIME_BLOCK.style.background = `linear-gradient(#00000057, #00000057), url(${city.background})`; 
-                            console.log(city.background)
+                             CITY_TIME_BLOCK.style.backgroundSize = "cover";
+                             CITY_TIME_BLOCK.style.backgroundPosition = "left top";
                             const CITY_TIME_BLOCK_HEADER =
                                 document.createElement("h2");
                             CITY_TIME_BLOCK_HEADER.innerText = city.name;
@@ -579,6 +591,7 @@
                             );
                             TIME_HOLDER_BUTTON.addEventListener("click", () => {
                                 CITY_TIME_BLOCK.classList.add("cityTimeHide");
+                                CITY_TIME_BLOCK.style.opacity = "0";
                                 setTimeout(() => {
                                     CITY_TIME_BLOCK.innerHTML = "";
                                     CITY_TIME_BLOCK.className = "cityTime";
