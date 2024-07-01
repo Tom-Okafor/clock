@@ -412,25 +412,25 @@
                             one: {
                                 name: "BEIJING",
                                 background: "/Beijing.jpeg",
-                                timeZone: 8
+                                timeZone: +8
                             },
 
                             two: {
                                 name: "DUBAI",
                                 background: "/Dubai.jpg",
-                                timeZone: 4
+                                timeZone: +4
                             },
 
                             three: {
                                 name: "HONG KONG",
                                 background: "/HongKong.jpeg",
-                                timeZone: 8
+                                timeZone: +8
                             },
 
                             four: {
                                 name: "LONDON",
                                 background: "/London.jpeg",
-                                timeZone: 1
+                                timeZone: +1
                             },
 
                             five: {
@@ -448,19 +448,19 @@
                             seven: {
                                 name: "PARIS",
                                 background: "/paris.jpeg",
-                                timeZone: 2
+                                timeZone: +2
                             },
 
                             eight: {
                                 name: "SYDNEY",
                                 background: "/SYDNEYAUS.jpeg",
-                                timeZone: 10
+                                timeZone: +10
                             },
 
                             nine: {
                                 name: "TOKYO",
                                 background: "/tokyo.jpeg",
-                                timeZone: 9
+                                timeZone: +9
                             }
                         };
                         const CITY_BUTTONS =
@@ -560,7 +560,10 @@
                                 document.createElement("span");
                             const TIME_HOLDER_BUTTON =
                                 document.createElement("button");
-                            const SPAN_TEXT = `GMT +${city.timeZone}`;
+                            let SPAN_TEXT = `GMT +${city.timeZone}`;
+                            if(city.timeZone < 0){
+                              SPAN_TEXT = `GMT ${city.timeZone}`
+                            }
                             const BUTTON_TEXT = "exit?";
                             TIME_HOLDER_SPAN.innerText = SPAN_TEXT;
                             TIME_HOLDER_BUTTON.innerText = BUTTON_TEXT;
