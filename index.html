@@ -233,7 +233,7 @@
                 position: absolute;
                 bottom: 60px;
                 right: 10px;
-                width: clamp(150px, 60vw, 250px);
+                width: clamp(150px, 60vw, 350px);
                 padding-inline: 10px;
                 opacity: 0;
                 display: none;
@@ -269,6 +269,69 @@
                 color: coral;
                 letter-spacing: 2px;
             }
+            
+            @media screen and (min-width: 600px) {
+              
+              .icon {
+                height: 100px;
+              }
+              
+              .cities li{
+                font-size: 1.5rem;
+                padding: 1.2rem;
+              }
+              
+              
+                  .cityTimeShow h2 {
+                font-size: 4rem;
+                padding-top: 3.5rem;  
+                font-weight: 900;
+            }
+            .showTime {
+                font-size: 7rem;
+                                font-weight: 900;
+
+            }
+            .showTime span {
+                font-size: 2rem;
+            }
+            .showTime button {
+                border: 2px solid tomato;
+                padding: 15px 25px;
+                border-radius: 10px;
+                backdrop-filter: blur(3px);
+                font-size: 1.3rem;
+            }
+            .showTime button:hover {
+                letter-spacing: 3.5px;
+                border-radius: 12px;
+            }
+            .time{
+              font-size: 1.5rem;
+            }
+              
+            }
+              @media screen and (min-width: 1000px) {
+                   .cityTimeShow h2 {
+                font-size: 8rem;
+            }
+               .showTime {
+                font-size: 7.5rem;
+            }
+            .showTime span {
+                font-size: 2.5rem;
+            }
+            
+            .showTime button{
+              font-size: 2rem;
+            }
+            
+            .time{
+              font-size: 2rem;
+            }
+            
+              }
+            
         </style>
     </head>
     <body>
@@ -526,7 +589,7 @@
                             });
                         }
                         function showCityTime(city) {
-                             CITY_TIME_BLOCK.style.background = `linear-gradient(#00000057, #00000057), url(${city.background})`; 
+                             CITY_TIME_BLOCK.style.background = `linear-gradient(#00000037, #00000037), url(${city.background})`; 
                              CITY_TIME_BLOCK.style.backgroundSize = "cover";
                              CITY_TIME_BLOCK.style.backgroundPosition = "left top";
                             const CITY_TIME_BLOCK_HEADER =
@@ -591,8 +654,15 @@
                             );
                             TIME_HOLDER_BUTTON.addEventListener("click", () => {
                                 CITY_TIME_BLOCK.classList.add("cityTimeHide");
+                                
+                                             CITY_TIME_BLOCK.style.filter = "blur(3px)";
                                 CITY_TIME_BLOCK.style.opacity = "0";
+                   
+                                
                                 setTimeout(() => {
+                               
+                           CITY_TIME_BLOCK.style.opacity = "1";
+                                  CITY_TIME_BLOCK.style.filter = "none";    
                                     CITY_TIME_BLOCK.innerHTML = "";
                                     CITY_TIME_BLOCK.className = "cityTime";
                                 }, 2050);
